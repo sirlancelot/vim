@@ -13,6 +13,8 @@ Rather than clutter up the `.vim` root folder, my personal additions have been
 placed either in the `*vimrc.vim` or `bundle/_`
 
   - [Fugitive](https://github.com/tpope/vim-fugitive)
+  - [Supertab](https://github.com/ervandew/supertab)
+  - [Surround](https://github.com/tpope/vim-surround)
 
 # Key Mappings
 
