@@ -88,13 +88,11 @@ inoremap <C-L> <C-O>:nohl<CR>
 
 " }}} ===========================================
 " File Handling {{{1
-" always switch to the current file directory..
+set hidden       " switch between buffers without requiring save
+set autoread     " load a file that was changed outside of vim
+" always switch to the current file directory
 au VimrcHooks BufEnter * cd %:p:h
-" Switch between buffers without saving
-set hidden
-" Set to auto read when a file is changed from the outside
-set autoread
-" Keep backups, even though everything is versioned
+
 set backup
 set nowritebackup
 set backupcopy=yes
