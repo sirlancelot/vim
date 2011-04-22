@@ -10,7 +10,9 @@
 " ===============================================
 set nocompatible
 " Initialize Path and Plugins {{{1
-if has('win32') || has('win64')
+" Check for already loaded pathogen so that we can source this script multiple
+" times without error.
+if (has('win32') || has('win64')) && !exists('g:loaded_pathogen')
 	" Cross-platform consistency
 	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
@@ -18,6 +20,7 @@ endif
 let mapleader=","
 
 filetype off                               " load these after pathogen
+runtime pathogen.vim
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on                  " ... here
