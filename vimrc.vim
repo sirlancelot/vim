@@ -54,9 +54,6 @@ set viewoptions=folds,options,cursor,unix,slash
 set list
 set listchars=tab:\>\ ,trail:-
 
-set laststatus=2
-set statusline=%<%f\ %h%m%r%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-
 " Toggle code fold
 nmap <space> za
 

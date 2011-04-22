@@ -16,6 +16,9 @@ set guitablabel=%t      " Show just the filename in the tab
 set guitabtooltip=%F    " Show the full path on rollover
 set switchbuf=usetab
 
+set laststatus=2
+set statusline=%<%f\ %h%m%r%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
 colorscheme molokai     " Soft colors for gui vim
 
 " Platform specific stuff
