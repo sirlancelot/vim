@@ -119,6 +119,12 @@ function! s:DeleteOldBackups() " {{{2
 endfunction " }}}
 
 " }}} ===========================================
+" FuzzyFinder Plugin Settings {{{1
+map <leader>fb :FufBuffer<CR>
+map <leader>ff :FufCoverageFile<CR>
+nnoremap <silent> <C-]> :FufTagWithCursorWord!<CR>
+vnoremap <silent> <C-]> :FufTagWithSelectedText!<CR>
+" }}} ===========================================
 " Check for GUI {{{1
 if has('gui_running')
 	runtime! gvimrc.vim
