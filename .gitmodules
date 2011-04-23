@@ -13,3 +13,6 @@
 [submodule "bundle/L9"]
 	path = bundle/L9
 	url = https://github.com/vim-scripts/L9
+[submodule "bundle/jekyll"]
+	path = bundle/jekyll
+	url = https://github.com/csexton/jekyll.vim.git
