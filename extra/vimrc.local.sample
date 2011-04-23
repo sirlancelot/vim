@@ -1,0 +1,2 @@
+let g:jekyll_path = ""
+let g:jekyll_post_suffix = "mkdn"

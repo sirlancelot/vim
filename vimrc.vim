@@ -25,6 +25,9 @@ call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on                  " ... here
 
+" source local settings
+runtime! vimrc.local.vim
+
 " }}} ===========================================
 " Easily modify vimrc {{{1
 nmap <leader>eg :e ~/.vim/gvimrc.vim<CR>
