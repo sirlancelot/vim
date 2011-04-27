@@ -26,3 +26,7 @@
 	path = bundle/minibufexpl
 	url = https://github.com/fholgado/minibufexpl.vim
 	ignore = dirty
+[submodule "bundle/git"]
+	path = bundle/git
+	url = https://github.com/tpope/vim-git
+	ignore = dirty
