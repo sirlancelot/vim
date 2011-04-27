@@ -1,7 +1,7 @@
 # Installation on *nix
 
     git clone https://github.com/sirlancelot/vim.git ~/.vim
-	./install.sh
+	./extra/install.sh
 
 You do not need to link `gvimrc.vim` as it is loaded at the bottom of `vimrc.vim`
 
