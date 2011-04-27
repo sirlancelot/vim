@@ -11,11 +11,16 @@
 set nocompatible
 let mapleader=","
 " Initialize Path and Plugins {{{1
-" Check for already loaded pathogen so that we can source this script multiple
-" times without error.
+" Cross-platform consistency. Check for already loaded pathogen so that we can
+" source this script multiple times without error.
 if (has('win32') || has('win64')) && !exists('g:loaded_pathogen')
-	" Cross-platform consistency
 	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif
+
+" Disable some plugins for console vim
+let g:pathogen_disabled = []
+if !has('gui_running')
+	call extend(g:pathogen_disabled,['minibufexpl','supertab'])
 endif
 
 filetype off                               " load these after pathogen
