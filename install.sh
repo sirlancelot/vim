@@ -15,11 +15,3 @@ ln -sf .vim/vimrc.vim .vimrc
 cd "$RCDIR"
 
 git submodule update --init
-
-for FOLDER in bundle/*; do
-	EXCLUDE=$FOLDER/.git/info/exclude
-	if [ -f $EXCLUDE ] && ! egrep -q "^doc/tags\*$" $EXCLUDE; then
-		echo Ignoring doc/tags in $FOLDER...
-		echo "doc/tags*" >> $EXCLUDE
-	fi
-done

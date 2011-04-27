@@ -1,18 +1,24 @@
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive
+	ignore = dirty
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround
+	ignore = dirty
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = https://github.com/ervandew/supertab
+	ignore = dirty
 [submodule "bundle/fuzzyfinder"]
 	path = bundle/fuzzyfinder
 	url = https://github.com/slack/vim-fuzzyfinder
+	ignore = dirty
 [submodule "bundle/L9"]
 	path = bundle/L9
 	url = https://github.com/vim-scripts/L9
+	ignore = dirty
 [submodule "bundle/jekyll"]
 	path = bundle/jekyll
 	url = https://github.com/csexton/jekyll.vim.git
+	ignore = dirty
