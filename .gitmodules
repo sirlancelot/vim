@@ -22,3 +22,7 @@
 	path = bundle/jekyll
 	url = https://github.com/csexton/jekyll.vim.git
 	ignore = dirty
+[submodule "bundle/minibufexpl"]
+	path = bundle/minibufexpl
+	url = https://github.com/fholgado/minibufexpl.vim
+	ignore = dirty

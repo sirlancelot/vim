@@ -15,6 +15,7 @@ placed either in the `*vimrc.vim` or `bundle/_`
   - [FuzzyFinder](https://github.com/slack/vim-fuzzyfinder)
   - [Jekyll](https://github.com/csexton/jekyll.vim)
   - [L9](https://github.com/vim-scripts/L9) *dependency of FuzzyFinder*
+  - [MiniBufEplorer](https://github.com/fholgado/minibufexpl.vim)
   - [Supertab](https://github.com/ervandew/supertab)
   - [Surround](https://github.com/tpope/vim-surround)
 

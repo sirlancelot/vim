@@ -9,6 +9,7 @@
 "
 " ===============================================
 set nocompatible
+let mapleader=","
 " Initialize Path and Plugins {{{1
 " Check for already loaded pathogen so that we can source this script multiple
 " times without error.
@@ -16,8 +17,6 @@ if (has('win32') || has('win64')) && !exists('g:loaded_pathogen')
 	" Cross-platform consistency
 	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
-
-let mapleader=","
 
 filetype off                               " load these after pathogen
 runtime pathogen.vim
@@ -96,15 +95,6 @@ inoremap <C-L> <C-O>:nohl<CR>
 " File Handling {{{1
 set hidden       " switch between buffers without requiring save
 set autoread     " load a file that was changed outside of vim
-" always switch to the current file directory
-au VimrcHooks BufEnter * call <SID>ChangeWorkingDirectory()
-function! s:ChangeWorkingDirectory() " {{{2
-	if exists('b:git_dir')
-		cd `=fnamemodify(b:git_dir,':h')`
-	else
-		cd %:p:h
-	endif
-endfunction " }}}
 
 set backup
 set nowritebackup
@@ -126,6 +116,21 @@ function! s:DeleteOldBackups() " {{{2
 			call delete(l:File)
 		endif
 	endfor
+endfunction " }}}
+
+" }}} ===========================================
+" Buffer Handling {{{1
+
+let g:miniBufExplSplitBelow = 0
+
+" always switch to the current file directory
+au VimrcHooks BufEnter * call <SID>ChangeWorkingDirectory()
+function! s:ChangeWorkingDirectory() " {{{2
+	if exists('b:git_dir')
+		cd `=fnamemodify(b:git_dir,':h')`
+	else
+		cd %:p:h
+	endif
 endfunction " }}}
 
 " }}} ===========================================
