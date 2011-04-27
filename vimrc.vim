@@ -97,7 +97,14 @@ inoremap <C-L> <C-O>:nohl<CR>
 set hidden       " switch between buffers without requiring save
 set autoread     " load a file that was changed outside of vim
 " always switch to the current file directory
-au VimrcHooks BufEnter * cd %:p:h
+au VimrcHooks BufEnter * call <SID>ChangeWorkingDirectory()
+function! s:ChangeWorkingDirectory() " {{{2
+	if exists('b:git_dir')
+		cd `=fnamemodify(b:git_dir,':h')`
+	else
+		cd %:p:h
+	endif
+endfunction " }}}
 
 set backup
 set nowritebackup
