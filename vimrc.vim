@@ -47,7 +47,7 @@ endif
 " }}} ===========================================
 " Look & feel {{{1
 syntax on
-colorscheme desert
+if !has('gui_running') | colorscheme desert | endif
 set background=dark
 set cmdheight=2
 set noequalalways
