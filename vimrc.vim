@@ -51,7 +51,6 @@ set background=dark
 set cmdheight=2
 set noequalalways
 set nowrap
-set number
 set showcmd
 set showmatch
 set splitbelow
