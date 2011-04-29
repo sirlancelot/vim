@@ -1,4 +1,3 @@
-" vim:set syn=vim fdm=marker ts=8 sw=8 noet:
 " ===============================================
 "    _  __(_)__ _  ________
 "  _| |/ / //  ' \/ __/ __/
@@ -29,7 +28,7 @@ call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on                  " ... here
 
-" source local settings
+" source local, machine-specific settings
 runtime! vimrc.local.vim
 
 " }}} ===========================================
@@ -106,6 +105,11 @@ set nowritebackup
 set backupcopy=yes
 set backupdir=$HOME/.vimbackup
 set directory=$HOME/.vimswap,./
+if exists("*mkdir")
+	" Create these directories if possible
+	if !isdirectory($HOME."/.vimbackup") | call mkdir($HOME . "/.vimbackup", "p") | endif
+	if !isdirectory($HOME."/.vimswap")   | call mkdir($HOME . "/.vimswap", "p") | endif
+endif
 
 " Timestamp the backups
 au VimrcHooks BufWritePre * let &backupext = '~' . localtime()
@@ -146,8 +150,6 @@ nnoremap <silent> <C-]> :FufTagWithCursorWord!<CR>
 vnoremap <silent> <C-]> :FufTagWithSelectedText!<CR>
 " }}} ===========================================
 " Check for GUI {{{1
-if has('gui_running')
-	runtime! gvimrc.vim
-endif
-
+if has('gui_running') | runtime! gvimrc.vim | endif
 " }}} ===========================================
+" vim:set syn=vim fdm=marker ts=8 sw=8 noet:
