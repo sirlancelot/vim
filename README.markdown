@@ -23,3 +23,13 @@ placed either in the `*vimrc.vim` or `bundle/_`
 # Key Mappings
 
 Leader Key: ,
+
+# Mac Terminal Settings
+
+If the <Home> and <End> keys aren't working for you in Console Vim, you need to
+add the following changes to your Terminal Preferences Keyboard Settings:
+
+  - Key: `Home`, Escape Sequence: `\033OH`
+  - Key: `End`, Escape Sequence: `\033OF`
+
+Note: `\033` is typed by pressing <Escape> when the cursor is in the text box.
