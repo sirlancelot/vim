@@ -17,6 +17,6 @@ cd "$RCDIR"
 git submodule update --init
 
 if [ ! -f vimrc.local.vim ]; then
-	cp extra/vimrc.local.vim ./
+	cp extra/vimrc.local.sample ./
 	echo You can now open and customize ~/.vim/vimrc.local.vim
 fi
