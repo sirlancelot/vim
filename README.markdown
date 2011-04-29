@@ -1,9 +1,18 @@
-# Installation on *nix
+# Installation
+
+Install on Unix-based machines:
 
     git clone https://github.com/sirlancelot/vim.git ~/.vim
-	./extra/install.sh
+    ./extra/install.sh
 
 You do not need to link `gvimrc.vim` as it is loaded at the bottom of `vimrc.vim`
+
+Install on other platforms: just copy or link `vimrc.vim` to your
+home directory and call it `.vimrc`
+
+If you want tags of just my settings (no plugins):
+
+    ctags -R bundle/_/ *.vim
 
 ## Plugins used
 
