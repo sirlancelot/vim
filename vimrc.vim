@@ -10,6 +10,7 @@
 set nocompatible
 let mapleader=","
 " Initialize Path and Plugins {{{1
+let s:GUIRunning = has('gui_running')
 " Cross-platform consistency. Check for already loaded pathogen so that we can
 " source this script multiple times without error.
 if (has('win32') || has('win64')) && !exists('g:loaded_pathogen')
@@ -18,7 +19,7 @@ endif
 
 " Disable some plugins for console vim
 let g:pathogen_disabled = []
-if !has('gui_running')
+if !s:GUIRunning
 	call extend(g:pathogen_disabled,['minibufexpl','supertab'])
 endif
 
@@ -46,14 +47,14 @@ endif
 " }}} ===========================================
 " Look & feel {{{1
 syntax on
-if !has('gui_running') | colorscheme desert | endif
+if !s:GUIRunning | colorscheme desert | endif
 set background=dark
 set cmdheight=2
 set noequalalways
 set nowrap
 set showcmd
 set showmatch
-set splitbelow
+set splitbelow splitright
 set viewoptions=folds,options,cursor,unix,slash
 
 set list
@@ -61,6 +62,7 @@ set listchars=tab:\>\ ,trail:-
 
 " Toggle code fold
 nmap <space> za
+nmap <s-space> zA
 
 " }}} ===========================================
 " Editing behavior {{{1
@@ -93,6 +95,8 @@ set incsearch
 " Turn off search highlighting
 nnoremap <C-L> :nohl<CR><C-L>
 inoremap <C-L> <C-O>:nohl<CR>
+
+cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
 
 " }}} ===========================================
 " File Handling {{{1
@@ -149,6 +153,6 @@ nnoremap <silent> <C-]> :FufTagWithCursorWord!<CR>
 vnoremap <silent> <C-]> :FufTagWithSelectedText!<CR>
 " }}} ===========================================
 " Check for GUI {{{1
-if has('gui_running') | runtime! gvimrc.vim | endif
+if s:GUIRunning | runtime! gvimrc.vim | endif
 " }}} ===========================================
 " vim:set syn=vim fdm=marker ts=8 sw=8 noet:
