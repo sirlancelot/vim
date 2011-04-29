@@ -10,6 +10,7 @@
 set nocompatible
 let mapleader=","
 " Initialize Path and Plugins {{{1
+let s:GUIRunning = has('gui_running')
 " Cross-platform consistency. Check for already loaded pathogen so that we can
 " source this script multiple times without error.
 if (has('win32') || has('win64')) && !exists('g:loaded_pathogen')
@@ -18,7 +19,7 @@ endif
 
 " Disable some plugins for console vim
 let g:pathogen_disabled = []
-if !has('gui_running')
+if !s:GUIRunning
 	call extend(g:pathogen_disabled,['minibufexpl','supertab'])
 endif
 
@@ -46,7 +47,7 @@ endif
 " }}} ===========================================
 " Look & feel {{{1
 syntax on
-if !has('gui_running') | colorscheme desert | endif
+if !s:GUIRunning | colorscheme desert | endif
 set background=dark
 set cmdheight=2
 set noequalalways
@@ -152,6 +153,6 @@ nnoremap <silent> <C-]> :FufTagWithCursorWord!<CR>
 vnoremap <silent> <C-]> :FufTagWithSelectedText!<CR>
 " }}} ===========================================
 " Check for GUI {{{1
-if has('gui_running') | runtime! gvimrc.vim | endif
+if s:GUIRunning | runtime! gvimrc.vim | endif
 " }}} ===========================================
 " vim:set syn=vim fdm=marker ts=8 sw=8 noet:
