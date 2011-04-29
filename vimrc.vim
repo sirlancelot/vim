@@ -53,7 +53,7 @@ set noequalalways
 set nowrap
 set showcmd
 set showmatch
-set splitbelow
+set splitbelow splitright
 set viewoptions=folds,options,cursor,unix,slash
 
 set list
@@ -61,6 +61,7 @@ set listchars=tab:\>\ ,trail:-
 
 " Toggle code fold
 nmap <space> za
+nmap <s-space> zA
 
 " }}} ===========================================
 " Editing behavior {{{1
@@ -93,6 +94,8 @@ set incsearch
 " Turn off search highlighting
 nnoremap <C-L> :nohl<CR><C-L>
 inoremap <C-L> <C-O>:nohl<CR>
+
+cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
 
 " }}} ===========================================
 " File Handling {{{1
