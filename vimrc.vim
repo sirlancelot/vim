@@ -57,9 +57,6 @@ set showmatch
 set splitbelow splitright
 set viewoptions=folds,options,cursor,unix,slash
 
-set list
-set listchars=tab:\>\ ,trail:-
-
 " Toggle code fold
 nmap <space> za
 nmap <s-space> zA

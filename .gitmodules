@@ -30,3 +30,7 @@
 	path = bundle/git
 	url = https://github.com/tpope/vim-git
 	ignore = dirty
+[submodule "bundle/indent-guides"]
+	path = bundle/indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides
+	ignore = dirty

@@ -23,6 +23,7 @@ placed either in the `*vimrc.vim` or `bundle/_`
   - [Fugitive](https://github.com/tpope/vim-fugitive)
   - [FuzzyFinder](https://github.com/slack/vim-fuzzyfinder)
   - [Git](https://github.com/tpope/vim-git) *updated runtime for Fugitive*
+  - [Indent Guides](https://github.com/nathanaelkane/vim-indent-guides)
   - [Jekyll](https://github.com/csexton/jekyll.vim)
   - [L9](https://github.com/vim-scripts/L9) *dependency of FuzzyFinder*
   - [MiniBufEplorer](https://github.com/fholgado/minibufexpl.vim)
