@@ -64,6 +64,28 @@ set listchars=tab:\>\ ,trail:-
 nmap <space> za
 nmap <s-space> zA
 
+set foldtext=VimrcFoldText()
+function! VimrcFoldText() " {{{2
+	" get first non-blank line
+	let fs = v:foldstart
+	while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+	endwhile
+	if fs > v:foldend
+		let line = getline(v:foldstart)
+	else
+		let line = getline(fs)
+	endif
+
+	let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+	let foldSize = 1 + v:foldend - v:foldstart
+	let foldSizeStr = " " . foldSize . " lines "
+	let foldLevelStr = repeat("+--", v:foldlevel)
+	let lineCount = line("$")
+	let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+	let expansionString = repeat(".", w - strlen(foldSizeStr) - strlen(line) - strlen(foldLevelStr) - strlen(foldPercentage))
+	return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endfunction " }}}
+
 " }}} ===========================================
 " Editing behavior {{{1
 set tabstop=8
