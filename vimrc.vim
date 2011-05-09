@@ -11,22 +11,25 @@ set nocompatible
 let mapleader=","
 " Initialize Path and Plugins {{{1
 let s:GUIRunning = has('gui_running')
-" Cross-platform consistency. Check for already loaded pathogen so that we can
-" source this script multiple times without error.
-if (has('win32') || has('win64')) && !exists('g:loaded_pathogen')
-	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
-
-" Disable some plugins for console vim
-let g:pathogen_disabled = []
-if !s:GUIRunning
-	call extend(g:pathogen_disabled,['minibufexpl','supertab'])
-endif
 
 filetype off                               " load these after pathogen
-runtime pathogen.vim
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+if !exists('g:loaded_pathogen') " {{{2
+	if (has('win32') || has('win64'))
+		" Make Windows more cross-platform friendly
+		set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+	endif
+
+	" Disable some plugins for console vim
+	let g:pathogen_disabled = []
+	if !s:GUIRunning
+		call extend(g:pathogen_disabled,['minibufexpl','supertab'])
+	endif
+
+	runtime pathogen.vim
+	let &rtp = expand("~/.vim/personal").",".&rtp
+	call pathogen#runtime_append_all_bundles()
+	call pathogen#helptags()
+endif " }}}
 filetype plugin indent on                  " ... here
 
 " source local, machine-specific settings
