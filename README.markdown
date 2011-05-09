@@ -12,13 +12,13 @@ home directory and call it `.vimrc`
 
 If you want tags of just my settings (no plugins):
 
-    ctags -R bundle/_/ *.vim
+    ctags -R personal/ *.vim
 
 ## Plugins used
 
 All plugins are placed in the `bundle/` subfolder and are git submodules.
 Rather than clutter up the `.vim` root folder, my personal additions have been
-placed either in the `*vimrc.vim` or `bundle/_`
+placed either in the `*vimrc.vim` or `personal/`
 
   - [Fugitive](https://github.com/tpope/vim-fugitive)
   - [FuzzyFinder](https://github.com/slack/vim-fuzzyfinder)
