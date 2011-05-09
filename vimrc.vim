@@ -11,22 +11,25 @@ set nocompatible
 let mapleader=","
 " Initialize Path and Plugins {{{1
 let s:GUIRunning = has('gui_running')
-" Cross-platform consistency. Check for already loaded pathogen so that we can
-" source this script multiple times without error.
-if (has('win32') || has('win64')) && !exists('g:loaded_pathogen')
-	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
-
-" Disable some plugins for console vim
-let g:pathogen_disabled = []
-if !s:GUIRunning
-	call extend(g:pathogen_disabled,['minibufexpl','supertab'])
-endif
 
 filetype off                               " load these after pathogen
-runtime pathogen.vim
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+if !exists('g:loaded_pathogen') " {{{2
+	if (has('win32') || has('win64'))
+		" Make Windows more cross-platform friendly
+		set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+	endif
+
+	" Disable some plugins for console vim
+	let g:pathogen_disabled = []
+	if !s:GUIRunning
+		call extend(g:pathogen_disabled,['minibufexpl','supertab'])
+	endif
+
+	runtime pathogen.vim
+	let &rtp = expand("~/.vim/personal").",".&rtp
+	call pathogen#runtime_append_all_bundles()
+	call pathogen#helptags()
+endif " }}}
 filetype plugin indent on                  " ... here
 
 " source local, machine-specific settings
@@ -57,12 +60,33 @@ set showmatch
 set splitbelow splitright
 set viewoptions=folds,options,cursor,unix,slash
 
-set list
-set listchars=tab:\>\ ,trail:-
-
 " Toggle code fold
 nmap <space> za
 nmap <s-space> zA
+
+set foldtext=VimrcFoldText()
+function! VimrcFoldText() " {{{2
+	" get first non-blank line
+	let fs = v:foldstart
+	while getline(fs) =~ '^\s*$'
+		let fs = nextnonblank(fs + 1)
+	endwhile
+	if fs > v:foldend
+		let line = getline(v:foldstart)
+	else
+		let line = getline(fs)
+	endif
+	let line = substitute(line, '/\*\|\*/\|{'.'{{\d\=', '', 'g')." "
+
+	let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+	let foldSize = 1 + v:foldend - v:foldstart
+	let foldSizeStr = " " . foldSize . " lines "
+	let foldLevelStr = repeat("+--", v:foldlevel)
+	let lineCount = line("$")
+	let foldPercentage = "[" . printf("%4.1f", (foldSize*1.0)/lineCount*100) . "%] "
+	let expansionString = repeat("-", w - strlen(foldSizeStr) - strlen(line) - strlen(foldLevelStr) - strlen(foldPercentage))
+	return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endfunction " }}}
 
 " }}} ===========================================
 " Editing behavior {{{1
