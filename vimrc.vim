@@ -99,6 +99,10 @@ set smarttab
 " Save a file even if I don't have write access (linux only)
 cmap w!! w !sudo tee % >/dev/null
 
+" Un/Indent blocks with tab
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
+
 " Shift+T Clears all trailing whitespace from the file
 nnoremap <silent> <S-T> :call <SID>StripTrailingWhitespace()<CR>
 function! s:StripTrailingWhitespace() " {{{2
