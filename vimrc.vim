@@ -4,7 +4,7 @@
 " (_)___/_//_/_/_/_/  \__/
 "
 " Maintainer: Matthew Pietz
-" Vim Version: 7.2
+" Version: v2-dev
 "
 " ===============================================
 set nocompatible
