@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RCDIR=$(pwd)/../
+RCDIR=$HOME/.vim
 NOW=$(date +%s)
 
 cd "$HOME"
@@ -14,9 +14,11 @@ ln -sf .vim/vimrc.vim .vimrc
 
 cd "$RCDIR"
 
+echo Initializing submodules...
 git submodule update --init
 
 if [ ! -f vimrc.local.vim ]; then
-	cp extra/vimrc.local.sample ./
+	echo Copying sample local vimrc...
+	cp extra/vimrc.local.sample vimrc.local.vim
 	echo You can now open and customize ~/.vim/vimrc.local.vim
 fi

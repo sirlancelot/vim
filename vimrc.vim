@@ -4,7 +4,7 @@
 " (_)___/_//_/_/_/_/  \__/
 "
 " Maintainer: Matthew Pietz
-" Vim Version: 7.2
+" Version: v3
 "
 " ===============================================
 set nocompatible
@@ -98,6 +98,10 @@ set smarttab
 
 " Save a file even if I don't have write access (linux only)
 cmap w!! w !sudo tee % >/dev/null
+
+" Un/Indent blocks with tab
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
 
 " Shift+T Clears all trailing whitespace from the file
 nnoremap <silent> <S-T> :call <SID>StripTrailingWhitespace()<CR>
