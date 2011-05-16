@@ -16,9 +16,10 @@ If you want tags of just my settings (no plugins):
 
 ## Plugins used
 
-All plugins are placed in the `bundle/` subfolder and are git submodules.
-Rather than clutter up the `.vim` root folder, my personal additions have been
-placed either in the `*vimrc.vim` or `personal/`
+All plugins are placed in the `bundle/` subfolder and are git submodules. Each
+bundle is loaded using [Pathogen][]. Rather than clutter up the `.vim` root
+folder, my personal additions have been placed either in the `*vimrc.vim` or
+`personal/`
 
   - [Coffee-Script](https://github.com/kchmck/vim-coffee-script)
   - [Fugitive](https://github.com/tpope/vim-fugitive)
@@ -30,6 +31,8 @@ placed either in the `*vimrc.vim` or `personal/`
   - [MiniBufEplorer](https://github.com/fholgado/minibufexpl.vim)
   - [Supertab](https://github.com/ervandew/supertab)
   - [Surround](https://github.com/tpope/vim-surround)
+
+  [Pathogen]: https://github.com/tpope/vim-pathogen
 
 # Key Mappings
 
