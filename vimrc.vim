@@ -8,32 +8,27 @@
 "
 " ===============================================
 set nocompatible
-let mapleader=","
-" Initialize Path and Plugins {{{1
+let mapleader = ","
 let s:GUIRunning = has('gui_running')
-
+let g:pathogen_disabled = []
+" Initialize Path and Plugins {{{1
 filetype off                               " load these after pathogen
 if !exists('g:loaded_pathogen') " {{{2
-	if (has('win32') || has('win64'))
-		" Make Windows more cross-platform friendly
-		set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-	endif
+	" Cross-platform runtime paths
+	set runtimepath=$HOME/.vim/personal,$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+	" source local, machine-specific settings
+	runtime! vimrc.local.vim
 
 	" Disable some plugins for console vim
-	let g:pathogen_disabled = []
 	if !s:GUIRunning
 		call extend(g:pathogen_disabled,['minibufexpl','supertab'])
 	endif
 
 	runtime pathogen.vim
-	let &rtp = expand("~/.vim/personal").",".&rtp
 	call pathogen#runtime_append_all_bundles()
 	call pathogen#helptags()
 endif " }}}
 filetype plugin indent on                  " ... here
-
-" source local, machine-specific settings
-runtime! vimrc.local.vim
 
 " }}} ===========================================
 " Easily modify vimrc {{{1
