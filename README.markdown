@@ -51,7 +51,10 @@ Note: `\033` is typed by pressing `<Escape>` when the cursor is in the text box.
 
 # On Pull Requests
 
-Pull Requests will only be merged if they are based off the tip of the [develop][] branch. Please rebase (don't merge!) your changes if you are behind. To learn about why rebase is better than merge, check out [The Case for Git Rebase][rebase].
+Pull Requests will only be merged if they are based off the tip of the
+[develop][] branch. Please rebase (don't merge!) your changes if you are behind.
+To learn about why rebase is better than merge, check out [The Case for Git
+Rebase][rebase].
 
   [develop]: /sirlancelot/vim/tree/develop
   [rebase]: http://darwinweb.net/articles/the-case-for-git-rebase
