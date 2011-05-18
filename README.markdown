@@ -28,6 +28,7 @@ folder, my personal additions have been placed either in the `*vimrc.vim` or
   - [Indent Guides](https://github.com/nathanaelkane/vim-indent-guides)
   - [Jekyll](https://github.com/csexton/jekyll.vim)
   - [L9](https://github.com/vim-scripts/L9) *dependency of FuzzyFinder*
+  - [Markdown](https://github.com/tpope/vim-markdown.git)
   - [MiniBufEplorer](https://github.com/fholgado/minibufexpl.vim)
   - [Supertab](https://github.com/ervandew/supertab)
   - [Surround](https://github.com/tpope/vim-surround)
