@@ -55,6 +55,8 @@ set showmatch
 set splitbelow splitright
 set viewoptions=folds,options,cursor,unix,slash
 
+let &listchars="tab:".nr2char(10217)." ,trail:".nr2char(8212)
+
 " Toggle code fold
 nmap <space> za
 nmap <s-space> zA
