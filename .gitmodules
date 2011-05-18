@@ -38,3 +38,7 @@
 	path = bundle/coffee-script
 	url = https://github.com/kchmck/vim-coffee-script
 	ignore = dirty
+[submodule "bundle/markdown"]
+	path = bundle/markdown
+	url = https://github.com/tpope/vim-markdown
+	ignore = dirty
