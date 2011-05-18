@@ -119,6 +119,7 @@ set incsearch
 nnoremap <C-L> :nohl<CR><C-L>
 inoremap <C-L> <C-O>:nohl<CR>
 
+" Show help window vertically
 cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
 
 " }}} ===========================================
@@ -140,8 +141,7 @@ endif
 " Timestamp the backups
 au VimrcHooks BufWritePre * let &backupext = '~' . localtime()
 au VimrcHooks VimLeave * call <SID>DeleteOldBackups()
-function! s:DeleteOldBackups() " {{{2
-	" Delete backups over 14 days old
+function! s:DeleteOldBackups() " {{{2 Delete backups over 14 days old
 	let l:Old = (60 * 60 * 24 * 14)
 	let l:BackupFiles = split(glob(&backupdir."/*", 1)."\n".glob(&backupdir."/.[^.]*",1), "\n")
 	let l:Now = localtime()
@@ -162,6 +162,7 @@ let g:miniBufExplSplitBelow = 0
 au VimrcHooks BufEnter * call <SID>ChangeWorkingDirectory()
 function! s:ChangeWorkingDirectory() " {{{2
 	if exists('b:git_dir')
+		" Change to git root directory
 		cd `=fnamemodify(b:git_dir,':h')`
 	else
 		cd %:p:h
