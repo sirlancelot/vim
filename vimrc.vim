@@ -87,6 +87,7 @@ endfunction " }}}
 
 " }}} ===========================================
 " Editing behavior {{{1
+set backspace=indent,eol,start
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
@@ -104,7 +105,8 @@ vnoremap <s-tab> <gv
 nnoremap <silent> <S-T> :call <SID>StripTrailingWhitespace()<CR>
 function! s:StripTrailingWhitespace() " {{{2
 	let l:Pos = getpos(".")
-	%s/$//e
+	%s/
+$//e
 	%s/\s\+$//e
 	call setpos(".", l:Pos)
 	nohl
