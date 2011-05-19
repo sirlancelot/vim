@@ -25,7 +25,7 @@ colorscheme molokai     " Soft colors for gui vim
 " }}} ===========================================
 " Platform specific stuff {{{1
 if has('gui_win32') " Windows {{{2
-	set guifont=Consolas
+	set guifont=Consolas:h9
 " }}} ===========================================
 elseif has('gui_macvim') " MacVim {{{2
 	set macmeta                    " Allow alt key to be mapped
