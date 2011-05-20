@@ -105,8 +105,7 @@ vnoremap <s-tab> <gv
 nnoremap <silent> <S-T> :call <SID>StripTrailingWhitespace()<CR>
 function! s:StripTrailingWhitespace() " {{{2
 	let l:Pos = getpos(".")
-	%s/
-$//e
+	%s/$//e
 	%s/\s\+$//e
 	call setpos(".", l:Pos)
 	nohl
