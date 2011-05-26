@@ -20,7 +20,9 @@ set number
 set laststatus=2
 set statusline=%<%f\ %h%m%r%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-colorscheme molokai     " Soft colors for gui vim
+let g:solarized_underline = 0      " don't underline folds (default: 1)
+let g:solarized_contrast = "high"  " make text easier to read (default: normal)
+colorscheme solarized
 
 " }}} ===========================================
 " Platform specific stuff {{{1
