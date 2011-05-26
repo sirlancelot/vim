@@ -9,12 +9,13 @@
 "
 " ===============================================
 " Configuration for Gui Vim
+" GUI Controls look & feel {{{1
 set guioptions-=T       " Hide the toolbar, it's lame
-
 set guitablabel=%t      " Show just the filename in the tab
 set guitabtooltip=%F    " Show the full path on rollover
 set switchbuf=usetab
 
+" }}} ===========================================
 " Increase visuals {{{1
 set number
 set laststatus=2
