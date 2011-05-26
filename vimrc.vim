@@ -4,36 +4,31 @@
 " (_)___/_//_/_/_/_/  \__/
 "
 " Maintainer: Matthew Pietz
-" Version: v6
+" Version: v7
 "
 " ===============================================
 set nocompatible
-let mapleader=","
-" Initialize Path and Plugins {{{1
+let mapleader = ","
 let s:GUIRunning = has('gui_running')
-
+let g:pathogen_disabled = []
+" Initialize Path and Plugins {{{1
 filetype off                               " load these after pathogen
 if !exists('g:loaded_pathogen') " {{{2
-	if (has('win32') || has('win64'))
-		" Make Windows more cross-platform friendly
-		set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-	endif
+	" Cross-platform runtime paths
+	set runtimepath=$HOME/.vim/personal,$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+	" source local, machine-specific settings
+	runtime! vimrc.local.vim
 
 	" Disable some plugins for console vim
-	let g:pathogen_disabled = []
 	if !s:GUIRunning
 		call extend(g:pathogen_disabled,['minibufexpl','supertab'])
 	endif
 
 	runtime pathogen.vim
-	let &rtp = expand("~/.vim/personal").",".&rtp
 	call pathogen#runtime_append_all_bundles()
 	call pathogen#helptags()
 endif " }}}
 filetype plugin indent on                  " ... here
-
-" source local, machine-specific settings
-runtime! vimrc.local.vim
 
 " }}} ===========================================
 " Easily modify vimrc {{{1
@@ -59,6 +54,8 @@ set showcmd
 set showmatch
 set splitbelow splitright
 set viewoptions=folds,options,cursor,unix,slash
+
+let &listchars="tab:".nr2char(10217)." ,trail:".nr2char(8212)
 
 " Toggle code fold
 nmap <space> za
@@ -90,6 +87,7 @@ endfunction " }}}
 
 " }}} ===========================================
 " Editing behavior {{{1
+set backspace=indent,eol,start
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
@@ -124,6 +122,7 @@ set incsearch
 nnoremap <C-L> :nohl<CR><C-L>
 inoremap <C-L> <C-O>:nohl<CR>
 
+" Show help window vertically
 cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
 
 " }}} ===========================================
@@ -145,8 +144,7 @@ endif
 " Timestamp the backups
 au VimrcHooks BufWritePre * let &backupext = '~' . localtime()
 au VimrcHooks VimLeave * call <SID>DeleteOldBackups()
-function! s:DeleteOldBackups() " {{{2
-	" Delete backups over 14 days old
+function! s:DeleteOldBackups() " {{{2 Delete backups over 14 days old
 	let l:Old = (60 * 60 * 24 * 14)
 	let l:BackupFiles = split(glob(&backupdir."/*", 1)."\n".glob(&backupdir."/.[^.]*",1), "\n")
 	let l:Now = localtime()
@@ -167,6 +165,7 @@ let g:miniBufExplSplitBelow = 0
 au VimrcHooks BufEnter * call <SID>ChangeWorkingDirectory()
 function! s:ChangeWorkingDirectory() " {{{2
 	if exists('b:git_dir')
+		" Change to git root directory
 		cd `=fnamemodify(b:git_dir,':h')`
 	else
 		cd %:p:h

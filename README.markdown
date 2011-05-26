@@ -28,6 +28,7 @@ folder, my personal additions have been placed either in the `*vimrc.vim` or
   - [Indent Guides](https://github.com/nathanaelkane/vim-indent-guides)
   - [Jekyll](https://github.com/csexton/jekyll.vim)
   - [L9](https://github.com/vim-scripts/L9) *dependency of FuzzyFinder*
+  - [Markdown](https://github.com/tpope/vim-markdown.git)
   - [MiniBufEplorer](https://github.com/fholgado/minibufexpl.vim)
   - [Supertab](https://github.com/ervandew/supertab)
   - [Surround](https://github.com/tpope/vim-surround)
@@ -40,17 +41,20 @@ Leader Key: ,
 
 # Mac Terminal Settings
 
-If the <Home> and <End> keys aren't working for you in Console Vim, you need to
+If the `<Home>` and `<End>` keys aren't working for you in Console Vim, you need to
 add the following changes to your Terminal Preferences Keyboard Settings:
 
   - Key: `Home`, Escape Sequence: `\033OH`
   - Key: `End`, Escape Sequence: `\033OF`
 
-Note: `\033` is typed by pressing <Escape> when the cursor is in the text box.
+Note: `\033` is typed by pressing `<Escape>` when the cursor is in the text box.
 
 # On Pull Requests
 
-Pull Requests will only be merged if they are based off the tip of the [develop][] branch. Please rebase (don't merge!) your changes if you are behind. To learn about why rebase is better than merge, check out [The Case for Git Rebase][rebase].
+Pull Requests will only be merged if they are based off the tip of the
+[develop][] branch. Please rebase (don't merge!) your changes if you are behind.
+To learn about why rebase is better than merge, check out [The Case for Git
+Rebase][rebase].
 
   [develop]: /sirlancelot/vim/tree/develop
   [rebase]: http://darwinweb.net/articles/the-case-for-git-rebase
