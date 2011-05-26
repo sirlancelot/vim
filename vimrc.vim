@@ -4,7 +4,7 @@
 " (_)___/_//_/_/_/_/  \__/
 "
 " Maintainer: Matthew Pietz
-" Version: v6
+" Version: v7
 "
 " ===============================================
 set nocompatible
