@@ -170,4 +170,4 @@ vnoremap <silent> <C-]> :FufTagWithSelectedText!<CR>
 " Check for GUI {{{1
 if s:GUIRunning | runtime! gvimrc.vim | endif
 " }}} ===========================================
-" vim:set syn=vim fdm=marker ts=8 sw=8 noet:
+" vim:set syn=vim fdm=marker ts=8 sw=8 tw=0 noet:
