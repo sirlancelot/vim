@@ -63,26 +63,14 @@ nmap <s-space> zA
 
 set foldtext=VimrcFoldText()
 function! VimrcFoldText() " {{{2
-	" get first non-blank line
-	let fs = v:foldstart
-	while getline(fs) =~ '^\s*$'
-		let fs = nextnonblank(fs + 1)
-	endwhile
-	if fs > v:foldend
-		let line = getline(v:foldstart)
-	else
-		let line = getline(fs)
-	endif
-	let line = substitute(line, '/\*\|\*/\|{'.'{{\d\=', '', 'g')." "
+	let line = foldtext()
 
-	let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
 	let foldSize = 1 + v:foldend - v:foldstart
-	let foldSizeStr = " " . foldSize . " lines "
-	let foldLevelStr = repeat("+--", v:foldlevel)
 	let lineCount = line("$")
-	let foldPercentage = "[" . printf("%4.1f", (foldSize*1.0)/lineCount*100) . "%] "
-	let expansionString = repeat("-", w - strlen(foldSizeStr) - strlen(line) - strlen(foldLevelStr) - strlen(foldPercentage))
-	return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+	let foldPercentage = printf("%4.1f", (foldSize*1.0)/lineCount*100)
+
+	" Show fold Percentage along with # of lines
+	return substitute(line, '^\([-+]\+\)\(\s\+\)\(\d\+\) lines', '\1 '.foldPercentage.'%\2(\3 lines)', 'g')
 endfunction " }}}
 
 " }}} ===========================================
