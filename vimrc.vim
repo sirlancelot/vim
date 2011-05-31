@@ -82,8 +82,11 @@ set shiftwidth=8
 set shiftround
 set smarttab
 
-" Save a file even if I don't have write access (linux only)
-cmap w!! w !sudo tee % >/dev/null
+" Save a file even if I don't have write access (mac & linux only)
+if s:GUIRunning && has('mac')
+	cmap w!! w !security execute-with-privileges /usr/bin/tee % > /dev/null
+else |  cmap w!! w !sudo tee % >/dev/null
+endif
 
 " Un/Indent blocks with tab
 vnoremap <tab> >gv
