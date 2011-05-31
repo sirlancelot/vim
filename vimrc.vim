@@ -118,15 +118,22 @@ cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
 set hidden       " switch between buffers without requiring save
 set autoread     " load a file that was changed outside of vim
 
+" Persistent undo, see vimrc.local.vim for `&undodir`
+if &undodir == '.' | set undodir=~/.vim/undo | endif
+set undofile
+set undolevels=1000
+set undoreload=10000
+
 set backup
 set nowritebackup
 set backupcopy=yes
 set backupdir=$HOME/.vimbackup
-set directory=$HOME/.vimswap,./
+set directory=$HOME/.vimswap
 if exists("*mkdir")
 	" Create these directories if possible
-	if !isdirectory($HOME."/.vimbackup") | call mkdir($HOME . "/.vimbackup", "p") | endif
-	if !isdirectory($HOME."/.vimswap")   | call mkdir($HOME . "/.vimswap", "p") | endif
+	if !isdirectory(&undodir)   | call mkdir(&undodir, "p")   | endif
+	if !isdirectory(&backupdir) | call mkdir(&backupdir, "p") | endif
+	if !isdirectory(&directory) | call mkdir(&directory, "p") | endif
 endif
 
 " Timestamp the backups
