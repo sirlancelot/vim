@@ -122,11 +122,13 @@ set hidden       " switch between buffers without requiring save
 set autoread     " load a file that was changed outside of vim
 
 " Persistent undo, see vimrc.local.vim for `&undodir`
-if &undodir == '.' | set undodir=~/.vim/undo | endif
-set undofile
-set undolevels=1000
-set undoreload=10000
-
+if has('undodir')
+	if &undodir == '.' | set undodir=~/.vim/undo | endif
+	if !isdirectory(&undodir) | call mkdir(&undodir, "p") | endif
+	set undofile
+	set undolevels=1000
+	set undoreload=10000
+endif
 set backup
 set nowritebackup
 set backupcopy=yes
@@ -134,7 +136,6 @@ set backupdir=$HOME/.vimbackup
 set directory=$HOME/.vimswap
 if exists("*mkdir")
 	" Create these directories if possible
-	if !isdirectory(&undodir)   | call mkdir(&undodir, "p")   | endif
 	if !isdirectory(&backupdir) | call mkdir(&backupdir, "p") | endif
 	if !isdirectory(&directory) | call mkdir(&directory, "p") | endif
 endif
@@ -144,7 +145,7 @@ au VimrcHooks BufWritePre * let &backupext = '~' . localtime()
 au VimrcHooks VimLeave * call <SID>DeleteOldBackups()
 function! s:DeleteOldBackups() " {{{2 Delete backups over 14 days old
 	let l:Old = (60 * 60 * 24 * 14)
-	let l:BackupFiles = split(glob(&backupdir."/*", 1)."\n".glob(&backupdir."/.[^.]*",1), "\n")
+	let l:BackupFiles = split(glob(&backupdir."/*")."\n".glob(&backupdir."/.[^.]*"), "\n")
 	let l:Now = localtime()
 
 	for l:File in l:BackupFiles
