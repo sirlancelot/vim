@@ -78,7 +78,7 @@ if has('gui_win32') || has('gui_gtk2')
 	noremap <C-Z> u
 	inoremap <C-Z> <C-O>u
 	noremap <C-Y> <C-R>
-	inoremap <C-Y> <C-O><C-R>
+	"inoremap <C-Y> <C-O><C-R>
 
 	" Select All...
 	noremap <C-A> gggH<C-O>G

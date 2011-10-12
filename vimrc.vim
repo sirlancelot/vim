@@ -166,7 +166,7 @@ function! s:ChangeWorkingDirectory() " {{{2
 	if exists('b:git_dir')
 		" Change to git root directory
 		cd `=fnamemodify(b:git_dir,':h')`
-	else
+	elseif expand('%:p') !~ '://'
 		cd %:p:h
 	endif
 endfunction " }}}
