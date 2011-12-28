@@ -22,10 +22,6 @@
 	path = bundle/jekyll
 	url = https://github.com/csexton/jekyll.vim.git
 	ignore = dirty
-[submodule "bundle/minibufexpl"]
-	path = bundle/minibufexpl
-	url = https://github.com/fholgado/minibufexpl.vim
-	ignore = dirty
 [submodule "bundle/git"]
 	path = bundle/git
 	url = https://github.com/tpope/vim-git
@@ -41,4 +37,8 @@
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/tpope/vim-markdown
+	ignore = dirty
+[submodule "bundle/solarized"]
+	path = bundle/solarized
+	url = https://github.com/altercation/vim-colors-solarized
 	ignore = dirty

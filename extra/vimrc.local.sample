@@ -1,2 +1,5 @@
 let g:jekyll_path = ""
 let g:jekyll_post_suffix = "mkdn"
+
+" Change this to a dropbox folder for persistent undo on any machine!
+set undodir=~/.vim/undo

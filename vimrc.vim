@@ -4,7 +4,7 @@
 " (_)___/_//_/_/_/_/  \__/
 "
 " Maintainer: Matthew Pietz
-" Version: v7
+" Version: v8
 "
 " ===============================================
 set nocompatible
@@ -18,15 +18,17 @@ if !exists('g:loaded_pathogen') " {{{2
 	set runtimepath=$HOME/.vim/personal,$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 	" source local, machine-specific settings
 	runtime! vimrc.local.vim
+	runtime pathogen.vim
 
 	" Disable some plugins for console vim
 	if !s:GUIRunning
-		call extend(g:pathogen_disabled,['minibufexpl','supertab'])
+		call add(g:pathogen_disabled, 'supertab')
+	endif
+	if v:version < '702'
+		call extend(g:pathogen_disabled, ['l9','fuzzyfinder'])
 	endif
 
-	runtime pathogen.vim
 	call pathogen#runtime_append_all_bundles()
-	call pathogen#helptags()
 endif " }}}
 filetype plugin indent on                  " ... here
 
@@ -63,26 +65,14 @@ nmap <s-space> zA
 
 set foldtext=VimrcFoldText()
 function! VimrcFoldText() " {{{2
-	" get first non-blank line
-	let fs = v:foldstart
-	while getline(fs) =~ '^\s*$'
-		let fs = nextnonblank(fs + 1)
-	endwhile
-	if fs > v:foldend
-		let line = getline(v:foldstart)
-	else
-		let line = getline(fs)
-	endif
-	let line = substitute(line, '/\*\|\*/\|{'.'{{\d\=', '', 'g')." "
+	let line = foldtext()
 
-	let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
 	let foldSize = 1 + v:foldend - v:foldstart
-	let foldSizeStr = " " . foldSize . " lines "
-	let foldLevelStr = repeat("+--", v:foldlevel)
 	let lineCount = line("$")
-	let foldPercentage = "[" . printf("%4.1f", (foldSize*1.0)/lineCount*100) . "%] "
-	let expansionString = repeat("-", w - strlen(foldSizeStr) - strlen(line) - strlen(foldLevelStr) - strlen(foldPercentage))
-	return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+	let foldPercentage = printf("%4.1f", (foldSize*1.0)/lineCount*100)
+
+	" Show fold Percentage along with # of lines
+	return substitute(line, '^\([-+]\+\)\(\s\+\)\(\d\+\) lines', '\1 '.foldPercentage.'%\2(\3 lines)', 'g')
 endfunction " }}}
 
 " }}} ===========================================
@@ -94,8 +84,11 @@ set shiftwidth=8
 set shiftround
 set smarttab
 
-" Save a file even if I don't have write access (linux only)
-cmap w!! w !sudo tee % >/dev/null
+" Save a file even if I don't have write access (mac & linux only)
+if s:GUIRunning && has('mac')
+	cmap w!! w !security execute-with-privileges /usr/bin/tee % > /dev/null
+else |  cmap w!! w !sudo tee % >/dev/null
+endif
 
 " Un/Indent blocks with tab
 vnoremap <tab> >gv
@@ -130,15 +123,23 @@ cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
 set hidden       " switch between buffers without requiring save
 set autoread     " load a file that was changed outside of vim
 
+" Persistent undo, see vimrc.local.vim for `&undodir`
+if has('undodir')
+	if &undodir == '.' | set undodir=~/.vim/undo | endif
+	if !isdirectory(&undodir) | call mkdir(&undodir, "p") | endif
+	set undofile
+	set undolevels=1000
+	set undoreload=10000
+endif
 set backup
 set nowritebackup
 set backupcopy=yes
 set backupdir=$HOME/.vimbackup
-set directory=$HOME/.vimswap,./
+set directory=$HOME/.vimswap
 if exists("*mkdir")
 	" Create these directories if possible
-	if !isdirectory($HOME."/.vimbackup") | call mkdir($HOME . "/.vimbackup", "p") | endif
-	if !isdirectory($HOME."/.vimswap")   | call mkdir($HOME . "/.vimswap", "p") | endif
+	if !isdirectory(&backupdir) | call mkdir(&backupdir, "p") | endif
+	if !isdirectory(&directory) | call mkdir(&directory, "p") | endif
 endif
 
 " Timestamp the backups
@@ -146,7 +147,7 @@ au VimrcHooks BufWritePre * let &backupext = '~' . localtime()
 au VimrcHooks VimLeave * call <SID>DeleteOldBackups()
 function! s:DeleteOldBackups() " {{{2 Delete backups over 14 days old
 	let l:Old = (60 * 60 * 24 * 14)
-	let l:BackupFiles = split(glob(&backupdir."/*", 1)."\n".glob(&backupdir."/.[^.]*",1), "\n")
+	let l:BackupFiles = split(glob(&backupdir."/*")."\n".glob(&backupdir."/.[^.]*"), "\n")
 	let l:Now = localtime()
 
 	for l:File in l:BackupFiles
@@ -167,7 +168,7 @@ function! s:ChangeWorkingDirectory() " {{{2
 	if exists('b:git_dir')
 		" Change to git root directory
 		cd `=fnamemodify(b:git_dir,':h')`
-	else
+	elseif expand('%:p') !~ '://'
 		cd %:p:h
 	endif
 endfunction " }}}
@@ -182,4 +183,4 @@ vnoremap <silent> <C-]> :FufTagWithSelectedText!<CR>
 " Check for GUI {{{1
 if s:GUIRunning | runtime! gvimrc.vim | endif
 " }}} ===========================================
-" vim:set syn=vim fdm=marker ts=8 sw=8 noet:
+" vim:set syn=vim fdm=marker ts=8 sw=8 tw=0 noet:
