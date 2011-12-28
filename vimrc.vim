@@ -21,7 +21,7 @@ if !exists('g:loaded_pathogen') " {{{2
 
 	" Disable some plugins for console vim
 	if !s:GUIRunning
-		call extend(g:pathogen_disabled,['minibufexpl','supertab'])
+		call extend(g:pathogen_disabled,['supertab'])
 	endif
 
 	runtime pathogen.vim
