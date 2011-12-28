@@ -18,15 +18,17 @@ if !exists('g:loaded_pathogen') " {{{2
 	set runtimepath=$HOME/.vim/personal,$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 	" source local, machine-specific settings
 	runtime! vimrc.local.vim
+	runtime pathogen.vim
 
 	" Disable some plugins for console vim
 	if !s:GUIRunning
-		call extend(g:pathogen_disabled,['supertab'])
+		call add(g:pathogen_disabled, 'supertab')
+	endif
+	if v:version < '702'
+		call extend(g:pathogen_disabled, ['l9','fuzzyfinder'])
 	endif
 
-	runtime pathogen.vim
 	call pathogen#runtime_append_all_bundles()
-	call pathogen#helptags()
 endif " }}}
 filetype plugin indent on                  " ... here
 
