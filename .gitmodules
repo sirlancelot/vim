@@ -42,3 +42,7 @@
 	path = bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized
 	ignore = dirty
+[submodule "bundle/zencoding"]
+	path = bundle/zencoding
+	url = https://github.com/mattn/zencoding-vim
+	ignore = dirty
