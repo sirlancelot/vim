@@ -22,16 +22,16 @@ folder, my personal additions have been placed either in the `*vimrc.vim` or
 `personal/`
 
   - [Coffee-Script](https://github.com/kchmck/vim-coffee-script)
+  - [Ctrl-P](https://github.com/kien/ctrlp.vim)
   - [Fugitive](https://github.com/tpope/vim-fugitive)
-  - [FuzzyFinder](https://github.com/slack/vim-fuzzyfinder)
   - [Git](https://github.com/tpope/vim-git) *updated runtime for Fugitive*
   - [Indent Guides](https://github.com/nathanaelkane/vim-indent-guides)
   - [Jekyll](https://github.com/csexton/jekyll.vim)
-  - [L9](https://github.com/vim-scripts/L9) *dependency of FuzzyFinder*
   - [Markdown](https://github.com/tpope/vim-markdown.git)
   - [Solarized](https://github.com/altercation/vim-colors-solarized) 
   - [Supertab](https://github.com/ervandew/supertab)
   - [Surround](https://github.com/tpope/vim-surround)
+  - [TabMan](https://github.com/kien/tabman.vim)
   - [ZenCoding](https://github.com/mattn/zencoding-vim)
 
   [Pathogen]: https://github.com/tpope/vim-pathogen
