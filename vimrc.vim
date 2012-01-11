@@ -22,10 +22,10 @@ if !exists('g:loaded_pathogen') " {{{2
 
 	" Disable some plugins for console vim
 	if !s:GUIRunning
-		call add(g:pathogen_disabled, 'supertab')
+		call extend(g:pathogen_disabled, ['supertab','indent-guides','solarized'])
 	endif
-	if v:version < '702'
-		call extend(g:pathogen_disabled, ['l9','fuzzyfinder'])
+	if v:version < 700
+		call extend(g:pathogen_disabled, ['tabman','ctrlp'])
 	endif
 
 	call pathogen#runtime_append_all_bundles()
@@ -160,8 +160,6 @@ endfunction " }}}
 " }}} ===========================================
 " Buffer Handling {{{1
 
-let g:miniBufExplSplitBelow = 0
-
 " always switch to the current file directory
 au VimrcHooks BufEnter * call <SID>ChangeWorkingDirectory()
 function! s:ChangeWorkingDirectory() " {{{2
@@ -173,12 +171,6 @@ function! s:ChangeWorkingDirectory() " {{{2
 	endif
 endfunction " }}}
 
-" }}} ===========================================
-" FuzzyFinder Plugin Settings {{{1
-map <leader>fb :FufBuffer<CR>
-map <leader>ff :FufCoverageFile<CR>
-nnoremap <silent> <C-]> :FufTagWithCursorWord!<CR>
-vnoremap <silent> <C-]> :FufTagWithSelectedText!<CR>
 " }}} ===========================================
 " Check for GUI {{{1
 if s:GUIRunning | runtime! gvimrc.vim | endif
