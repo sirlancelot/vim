@@ -40,6 +40,10 @@ folder, my personal additions have been placed either in the `*vimrc.vim` or
 
 Leader Key: ,
 
+  - Use `<leader>ev` and `<leader>eg` to edit vimrc and gvimrc respectively.
+    They will be automatically reloaded when you save.
+  - Hit `<space>` on a fold to toggle open or close. `<s-space>` is recursive.
+
 # Mac Terminal Settings
 
 If the `<Home>` and `<End>` keys aren't working for you in Console Vim, you need to
