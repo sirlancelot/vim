@@ -34,13 +34,15 @@ filetype plugin indent on                  " ... here
 
 " }}} ===========================================
 " Easily modify vimrc {{{1
+
 nmap <leader>eg :e ~/.vim/gvimrc.vim<CR>
 nmap <leader>ev :e ~/.vim/vimrc.vim<CR>
 if has("autocmd")
 	augroup VimrcHooks
 		au!
 		" Reload `.vimrc` when saved
-		au BufWritePost .vimrc,_vimrc,vimrc.vim,gvimrc.vim so $MYVIMRC
+		" We only really care about $MYVIMRC when we need to reload it
+		au BufWritePost .vimrc,_vimrc,vimrc.vim,gvimrc.vim call sorc#ReloadRC()
 	augroup END
 endif
 
@@ -95,14 +97,7 @@ vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
 " Shift+T Clears all trailing whitespace from the file
-nnoremap <silent> <S-T> :call <SID>StripTrailingWhitespace()<CR>
-function! s:StripTrailingWhitespace() " {{{2
-	let l:Pos = getpos(".")
-	%s/$//e
-	%s/\s\+$//e
-	call setpos(".", l:Pos)
-	nohl
-endfunction " }}}
+nnoremap <silent> <S-T> :call sorc#StripTrailingWhitespace()<CR>
 
 " }}} ===========================================
 " Searching {{{1
@@ -144,18 +139,7 @@ endif
 
 " Timestamp the backups
 au VimrcHooks BufWritePre * let &backupext = '~' . localtime()
-au VimrcHooks VimLeave * call <SID>DeleteOldBackups()
-function! s:DeleteOldBackups() " {{{2 Delete backups over 14 days old
-	let l:Old = (60 * 60 * 24 * 14)
-	let l:BackupFiles = split(glob(&backupdir."/*")."\n".glob(&backupdir."/.[^.]*"), "\n")
-	let l:Now = localtime()
-
-	for l:File in l:BackupFiles
-		if (l:Now - getftime(l:File)) > l:Old
-			call delete(l:File)
-		endif
-	endfor
-endfunction " }}}
+au VimrcHooks VimLeave * call sorc#DeleteOldBackups()
 
 " }}} ===========================================
 " Buffer Handling {{{1
