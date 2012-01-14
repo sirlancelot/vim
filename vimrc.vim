@@ -38,12 +38,11 @@ filetype plugin indent on                  " ... here
 nmap <leader>eg :e ~/.vim/gvimrc.vim<CR>
 nmap <leader>ev :e ~/.vim/vimrc.vim<CR>
 if has("autocmd")
-	augroup VimrcHooks
-		au!
-		" Reload `.vimrc` when saved
-		" We only really care about $MYVIMRC when we need to reload it
-		au BufWritePost .vimrc,_vimrc,vimrc.vim,gvimrc.vim call sorc#ReloadRC()
+	augroup VimrcHooks | au!
 	augroup END
+	" Reload `.vimrc` when saved
+	" We only really care about $MYVIMRC when we need to reload it
+	au VimrcHooks BufWritePost .vimrc,_vimrc,vimrc.vim,gvimrc.vim call sorc#ReloadRC()
 endif
 
 " }}} ===========================================
