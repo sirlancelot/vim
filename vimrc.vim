@@ -155,6 +155,10 @@ function! s:ChangeWorkingDirectory() " {{{2
 endfunction " }}}
 
 " }}} ===========================================
+" TabMan Plugin Settings {{{1
+let g:tabman_number = 0
+
+" }}} ===========================================
 " Check for GUI {{{1
 if s:GUIRunning | runtime! gvimrc.vim | endif
 " }}} ===========================================

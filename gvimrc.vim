@@ -38,7 +38,7 @@ elseif has('gui_macvim') " MacVim {{{2
 	set transparency=4
 " }}} ===========================================
 elseif has('gui_gtk') " Gnome {{{2
-	set guifont=DejaVu\ Sans\ Mono\ 9
+	set guifont=Ubuntu\ Mono\ 9
 	set showtabline=2             " Always show the tab bar
 
 	" Different fixes for disappearing mouse problem
