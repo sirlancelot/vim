@@ -29,6 +29,8 @@ colorscheme solarized
 " Platform specific stuff {{{1
 if has('gui_win32') " Windows {{{2
 	set guifont=Consolas:h9
+
+	set guioptions-=L " Hide left scrollbar
 " }}} ===========================================
 elseif has('gui_macvim') " MacVim {{{2
 	set macmeta                    " Allow alt key to be mapped
