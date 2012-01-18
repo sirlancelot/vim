@@ -7,7 +7,7 @@
 " Version: v8
 "
 " ===============================================
-set nocompatible
+set nocompatible encoding=utf8
 let mapleader = ","
 let s:GUIRunning = has('gui_running')
 let g:pathogen_disabled = []
@@ -58,7 +58,9 @@ set showmatch
 set splitbelow splitright
 set viewoptions=folds,options,cursor,unix,slash
 
-let &listchars="tab:".nr2char(10217)." ,trail:".nr2char(8212)
+" toggle show tabs and trailing whitespace
+nmap <tab> :set list! list?<CR>
+let &listchars="tab:".nr2char(9656).nr2char(183).",trail:".nr2char(8212)
 
 " Toggle code fold
 nmap <space> za
@@ -96,7 +98,7 @@ vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
 " Shift+T Clears all trailing whitespace from the file
-nnoremap <silent> <S-T> :call sorc#StripTrailingWhitespace()<CR>
+nnoremap <silent> <S-T> :call sorc#Preserve('%s/\s\+$//e')<CR>
 
 " }}} ===========================================
 " Searching {{{1
