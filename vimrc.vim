@@ -75,7 +75,7 @@ function! VimrcFoldText() " {{{2
 	let foldPercentage = printf("%4.1f", (foldSize*1.0)/lineCount*100)
 
 	" Show fold Percentage along with # of lines
-	return substitute(line, '^\([-+]\+\)\(\s\+\)\(\d\+\) lines', '\1 '.foldPercentage.'%\2(\3 lines)', 'g')
+	return substitute(line, '^\([-+]\+\)\(\s\+\)\(\d\+\) lines:', '\1 '.foldPercentage.'%\2(\3 lines)', 'g')
 endfunction " }}}
 
 " }}} ===========================================
