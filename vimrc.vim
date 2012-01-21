@@ -32,6 +32,12 @@ if !exists('g:loaded_pathogen') " {{{2
 endif " }}}
 filetype plugin indent on                  " ... here
 
+function! SetIfDefault(Option, New) " {{{2
+	let l:Current = eval('&'.a:Option)
+	exe 'set '.a:Option.'&'
+	exe 'set '.a:Option.'='.(l:Current == eval('&'.a:Option) ? a:New : l:Current)
+endfunction " }}}
+
 " }}} ===========================================
 " Easily modify vimrc {{{1
 
@@ -119,9 +125,9 @@ cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
 set hidden       " switch between buffers without requiring save
 set autoread     " load a file that was changed outside of vim
 
-" Persistent undo, see vimrc.local.vim for `&undodir`
-if has('undodir')
-	if &undodir == '.' | set undodir=~/.vim/undo | endif
+if has('persistent_undo')
+	" Set this to your Dropbox folder in `vimrc.local.cim`
+	call SetIfDefault('undodir', '$HOME/.vim/undo')
 	if !isdirectory(&undodir) | call mkdir(&undodir, "p") | endif
 	set undofile
 	set undolevels=1000
@@ -130,8 +136,8 @@ endif
 set backup
 set nowritebackup
 set backupcopy=yes
-set backupdir=$HOME/.vimbackup
-set directory=$HOME/.vimswap
+call SetIfDefault('backupdir', '$HOME/.vimbackup')
+call SetIfDefault('directory', '$HOME/.vimswap')
 if exists("*mkdir")
 	" Create these directories if possible
 	if !isdirectory(&backupdir) | call mkdir(&backupdir, "p") | endif
