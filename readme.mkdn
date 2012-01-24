@@ -45,6 +45,9 @@ Leader Key: ,
   - Hit `<space>` on a fold to toggle open or close. `<s-space>` is recursive.
   - `<tab>` will toggle `'list'` which will visualize tabs and trailing
     whitespace.
+  - `<tab>` and `<s-tab>` with a selection will indent and unindent,
+    respectively.
+  - shift+`T` in normal mode will strip all trailing whitespace.
 
 # Mac Terminal Settings
 
@@ -63,5 +66,9 @@ Pull Requests will only be merged if they are based off the tip of the
 To learn about why rebase is better than merge, check out [The Case for Git
 Rebase][rebase].
 
+In short, to bring your Working Copy up to the tip of [develop][], you can use the
+rebase feature: `git pull --rebase`. See [Pull with Rebase][pull] for details.
+
   [develop]: /sirlancelot/vim/tree/develop
   [rebase]: http://darwinweb.net/articles/the-case-for-git-rebase
+  [pull]: http://gitready.com/advanced/2009/02/11/pull-with-rebase.html
