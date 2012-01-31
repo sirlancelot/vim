@@ -8,10 +8,10 @@
 "
 " ===============================================
 set nocompatible encoding=utf8
+" Initialize Path and Plugins {{{1
 let mapleader = ","
 let s:GUIRunning = has('gui_running')
 let g:pathogen_disabled = []
-" Initialize Path and Plugins {{{1
 filetype off                               " load these after pathogen
 if !exists('g:loaded_pathogen') " {{{2
 	" Cross-platform runtime paths
@@ -127,7 +127,7 @@ set autoread     " load a file that was changed outside of vim
 
 if has('persistent_undo')
 	" Set this to your Dropbox folder in `vimrc.local.cim`
-	call SetIfDefault('undodir', '$HOME/.vim/undo')
+	call SetIfDefault('undodir', '$HOME/.vimundo//')
 	if !isdirectory(&undodir) | call mkdir(&undodir, "p") | endif
 	set undofile
 	set undolevels=1000
@@ -137,7 +137,7 @@ set backup
 set nowritebackup
 set backupcopy=yes
 call SetIfDefault('backupdir', '$HOME/.vimbackup')
-call SetIfDefault('directory', '$HOME/.vimswap')
+call SetIfDefault('directory', '$HOME/.vimswap//')
 if exists("*mkdir")
 	" Create these directories if possible
 	if !isdirectory(&backupdir) | call mkdir(&backupdir, "p") | endif
