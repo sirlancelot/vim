@@ -4,7 +4,7 @@
 " /___/\___/ (_)___/_//_/_/_/_/  \__/
 "
 " Maintainer: Matthew Pietz
-" Version: v8
+" Version: v9
 "
 " ===============================================
 " Various commands that don't always need to be loaded by my .vimrc
