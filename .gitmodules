@@ -10,14 +10,6 @@
 	path = bundle/supertab
 	url = https://github.com/ervandew/supertab
 	ignore = dirty
-[submodule "bundle/fuzzyfinder"]
-	path = bundle/fuzzyfinder
-	url = https://github.com/slack/vim-fuzzyfinder
-	ignore = dirty
-[submodule "bundle/L9"]
-	path = bundle/L9
-	url = https://github.com/vim-scripts/L9
-	ignore = dirty
 [submodule "bundle/jekyll"]
 	path = bundle/jekyll
 	url = https://github.com/csexton/jekyll.vim.git
@@ -41,4 +33,16 @@
 [submodule "bundle/solarized"]
 	path = bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized
+	ignore = dirty
+[submodule "bundle/zencoding"]
+	path = bundle/zencoding
+	url = https://github.com/mattn/zencoding-vim
+	ignore = dirty
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim
+	ignore = dirty
+[submodule "bundle/tabman"]
+	path = bundle/tabman
+	url = https://github.com/kien/tabman.vim
 	ignore = dirty

@@ -4,14 +4,14 @@
 " (_)___/_//_/_/_/_/  \__/
 "
 " Maintainer: Matthew Pietz
-" Version: v8
+" Version: v9
 "
 " ===============================================
-set nocompatible
+set nocompatible encoding=utf8
+" Initialize Path and Plugins {{{1
 let mapleader = ","
 let s:GUIRunning = has('gui_running')
 let g:pathogen_disabled = []
-" Initialize Path and Plugins {{{1
 filetype off                               " load these after pathogen
 if !exists('g:loaded_pathogen') " {{{2
 	" Cross-platform runtime paths
@@ -22,26 +22,33 @@ if !exists('g:loaded_pathogen') " {{{2
 
 	" Disable some plugins for console vim
 	if !s:GUIRunning
-		call add(g:pathogen_disabled, 'supertab')
+		call extend(g:pathogen_disabled, ['supertab','indent-guides','solarized'])
 	endif
-	if v:version < '702'
-		call extend(g:pathogen_disabled, ['l9','fuzzyfinder'])
+	if v:version < 700
+		call extend(g:pathogen_disabled, ['tabman','ctrlp'])
 	endif
 
 	call pathogen#runtime_append_all_bundles()
 endif " }}}
 filetype plugin indent on                  " ... here
 
+function! SetIfDefault(Option, New) " {{{2
+	let l:Current = eval('&'.a:Option)
+	exe 'set '.a:Option.'&'
+	exe 'set '.a:Option.'='.(l:Current == eval('&'.a:Option) ? a:New : l:Current)
+endfunction " }}}
+
 " }}} ===========================================
 " Easily modify vimrc {{{1
+
 nmap <leader>eg :e ~/.vim/gvimrc.vim<CR>
 nmap <leader>ev :e ~/.vim/vimrc.vim<CR>
 if has("autocmd")
-	augroup VimrcHooks
-		au!
-		" Reload `.vimrc` when saved
-		au BufWritePost .vimrc,_vimrc,vimrc.vim,gvimrc.vim so $MYVIMRC
+	augroup VimrcHooks | au!
 	augroup END
+	" Reload `.vimrc` when saved
+	" We only really care about $MYVIMRC when we need to reload it
+	au VimrcHooks BufWritePost .vimrc,_vimrc,vimrc.vim,gvimrc.vim call sorc#ReloadRC()
 endif
 
 " }}} ===========================================
@@ -57,7 +64,9 @@ set showmatch
 set splitbelow splitright
 set viewoptions=folds,options,cursor,unix,slash
 
-let &listchars="tab:".nr2char(10217)." ,trail:".nr2char(8212)
+" toggle show tabs and trailing whitespace
+nmap <tab> :set list! list?<CR>
+let &listchars="tab:".nr2char(9656).nr2char(183).",trail:".nr2char(8212)
 
 " Toggle code fold
 nmap <space> za
@@ -72,7 +81,7 @@ function! VimrcFoldText() " {{{2
 	let foldPercentage = printf("%4.1f", (foldSize*1.0)/lineCount*100)
 
 	" Show fold Percentage along with # of lines
-	return substitute(line, '^\([-+]\+\)\(\s\+\)\(\d\+\) lines', '\1 '.foldPercentage.'%\2(\3 lines)', 'g')
+	return substitute(line, '^\([-+]\+\)\(\s\+\)\(\d\+\) lines:', '\1 '.foldPercentage.'%\2(\3 lines)', 'g')
 endfunction " }}}
 
 " }}} ===========================================
@@ -95,14 +104,7 @@ vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
 " Shift+T Clears all trailing whitespace from the file
-nnoremap <silent> <S-T> :call <SID>StripTrailingWhitespace()<CR>
-function! s:StripTrailingWhitespace() " {{{2
-	let l:Pos = getpos(".")
-	%s/$//e
-	%s/\s\+$//e
-	call setpos(".", l:Pos)
-	nohl
-endfunction " }}}
+nnoremap <silent> <S-T> :call sorc#Preserve('%s/\s\+$//e')<CR>
 
 " }}} ===========================================
 " Searching {{{1
@@ -123,9 +125,9 @@ cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
 set hidden       " switch between buffers without requiring save
 set autoread     " load a file that was changed outside of vim
 
-" Persistent undo, see vimrc.local.vim for `&undodir`
-if has('undodir')
-	if &undodir == '.' | set undodir=~/.vim/undo | endif
+if has('persistent_undo')
+	" Set this to your Dropbox folder in `vimrc.local.cim`
+	call SetIfDefault('undodir', '$HOME/.vimundo//')
 	if !isdirectory(&undodir) | call mkdir(&undodir, "p") | endif
 	set undofile
 	set undolevels=1000
@@ -134,8 +136,8 @@ endif
 set backup
 set nowritebackup
 set backupcopy=yes
-set backupdir=$HOME/.vimbackup
-set directory=$HOME/.vimswap
+call SetIfDefault('backupdir', '$HOME/.vimbackup')
+call SetIfDefault('directory', '$HOME/.vimswap//')
 if exists("*mkdir")
 	" Create these directories if possible
 	if !isdirectory(&backupdir) | call mkdir(&backupdir, "p") | endif
@@ -144,23 +146,10 @@ endif
 
 " Timestamp the backups
 au VimrcHooks BufWritePre * let &backupext = '~' . localtime()
-au VimrcHooks VimLeave * call <SID>DeleteOldBackups()
-function! s:DeleteOldBackups() " {{{2 Delete backups over 14 days old
-	let l:Old = (60 * 60 * 24 * 14)
-	let l:BackupFiles = split(glob(&backupdir."/*")."\n".glob(&backupdir."/.[^.]*"), "\n")
-	let l:Now = localtime()
-
-	for l:File in l:BackupFiles
-		if (l:Now - getftime(l:File)) > l:Old
-			call delete(l:File)
-		endif
-	endfor
-endfunction " }}}
+au VimrcHooks VimLeave * call sorc#DeleteOldBackups()
 
 " }}} ===========================================
 " Buffer Handling {{{1
-
-let g:miniBufExplSplitBelow = 0
 
 " always switch to the current file directory
 au VimrcHooks BufEnter * call <SID>ChangeWorkingDirectory()
@@ -174,11 +163,9 @@ function! s:ChangeWorkingDirectory() " {{{2
 endfunction " }}}
 
 " }}} ===========================================
-" FuzzyFinder Plugin Settings {{{1
-map <leader>fb :FufBuffer<CR>
-map <leader>ff :FufCoverageFile<CR>
-nnoremap <silent> <C-]> :FufTagWithCursorWord!<CR>
-vnoremap <silent> <C-]> :FufTagWithSelectedText!<CR>
+" TabMan Plugin Settings {{{1
+let g:tabman_number = 0
+
 " }}} ===========================================
 " Check for GUI {{{1
 if s:GUIRunning | runtime! gvimrc.vim | endif

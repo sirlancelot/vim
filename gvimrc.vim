@@ -5,7 +5,7 @@
 "  /___/
 "
 " Maintainer: Matthew Pietz
-" Version: v8
+" Version: v9
 "
 " ===============================================
 " Configuration for Gui Vim
@@ -29,6 +29,8 @@ colorscheme solarized
 " Platform specific stuff {{{1
 if has('gui_win32') " Windows {{{2
 	set guifont=Consolas:h9
+
+	set guioptions-=L " Hide left scrollbar
 " }}} ===========================================
 elseif has('gui_macvim') " MacVim {{{2
 	set macmeta                    " Allow alt key to be mapped
@@ -38,7 +40,7 @@ elseif has('gui_macvim') " MacVim {{{2
 	set transparency=4
 " }}} ===========================================
 elseif has('gui_gtk') " Gnome {{{2
-	set guifont=DejaVu\ Sans\ Mono\ 9
+	set guifont=Ubuntu\ Mono\ 9
 	set showtabline=2             " Always show the tab bar
 
 	" Different fixes for disappearing mouse problem

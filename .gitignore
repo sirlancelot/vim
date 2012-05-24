@@ -1,3 +1,6 @@
 .netrwhist
 *.local.vim
 tags
+undo/
+swap/
+backup/
