@@ -15,6 +15,10 @@ fi
 
 cd "$GITROOT"
 git ls-files "*.vim" | while read File; do
+	if ! grep -Eq "^\" Version: v.+$" "$File"; then
+		continue
+	fi
+
 	echo "Bumping version number in $File..."
 	if ! sed "s/^\(\" Version: \)v.*$/\1v$Version/" "$File" > "$File~"; then
 		echo "Could not replace Version in $File." >&2
