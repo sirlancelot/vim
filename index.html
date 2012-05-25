@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Vim by sirlancelot</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Vim</h1>
+        <h2>A &quot;sensible defaults&quot; configuration for Vim. I'm primarily a PHP developer but these settings assume nothing. Instead, I tried to make a boilerplate setup that works for almost any environment.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/sirlancelot/vim/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/sirlancelot/vim/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/sirlancelot/vim" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>sirlancelot's dot vimrc</h1>
+
+<p>Keeping things minimal yet convenient. Find out how to
+<a href="#installation">install it</a>, then learn the <a href="#key-mappings">key mappings</a>. If
+you're on a Mac, get your <a href="#mac-terminal-settings">terminal settings right</a>.
+Find out what <a href="#plugins-used">plugins</a> I used. If you're feeling generous, you
+can even <a href="#contribute-pull-requests">contribute</a>.</p>
+
+<h2>installation</h2>
+
+<p>Install on Unix-based machines:</p>
+
+<pre><code>git clone https://github.com/sirlancelot/vim ~/.vim
+./extra/install.sh
+</code></pre>
+
+<p>You do not need to link <code>gvimrc.vim</code> as it is loaded at the bottom of <code>vimrc.vim</code></p>
+
+<p>Install on other platforms: just copy or link <code>vimrc.vim</code> to your
+home directory and call it <code>.vimrc</code></p>
+
+<p>If you want tags of just my settings (no plugins):</p>
+
+<pre><code>ctags -R personal/ *.vim
+</code></pre>
+
+<h2>key mappings</h2>
+
+<p>Leader Key: , <em>(comma)</em></p>
+
+<ul>
+<li>Use <code>&lt;leader&gt;ev</code> and <code>&lt;leader&gt;eg</code> to edit vimrc and gvimrc respectively.
+They will be automatically reloaded when you save.</li>
+<li>Hit <code>&lt;space&gt;</code> on a fold to toggle open or close. <code>&lt;s-space&gt;</code> is recursive.</li>
+<li>
+<code>&lt;tab&gt;</code> will toggle <code>'list'</code> which will visualize tabs and trailing
+whitespace.</li>
+<li>
+<code>&lt;tab&gt;</code> and <code>&lt;s-tab&gt;</code> with a selection will indent and unindent,
+respectively.</li>
+<li>shift+<code>T</code> in normal mode will strip all trailing whitespace.</li>
+</ul><h2>mac terminal settings</h2>
+
+<p>If the <code>&lt;Home&gt;</code> and <code>&lt;End&gt;</code> keys aren't working for you in Console Vim, you need to
+add the following changes to your Terminal Preferences Keyboard Settings:</p>
+
+<ul>
+<li>Key: <code>Home</code>, Escape Sequence: <code>\033OH</code>
+</li>
+<li>Key: <code>End</code>, Escape Sequence: <code>\033OF</code>
+</li>
+</ul><p>Note: <code>\033</code> is typed by pressing <code>&lt;Escape&gt;</code> when the cursor is in the text box.</p>
+
+<h2>plugins used</h2>
+
+<p>All plugins are placed in the <code>bundle/</code> subfolder and are git submodules. Each
+bundle is loaded using <a href="https://github.com/tpope/vim-pathogen">Pathogen</a>. Rather than clutter up the <code>.vim</code> root
+folder, my personal additions have been placed either in the <code>*vimrc.vim</code> or
+<code>personal/</code></p>
+
+<ul>
+<li><a href="https://github.com/kchmck/vim-coffee-script">Coffee-Script</a></li>
+<li><a href="https://github.com/kien/ctrlp.vim">Ctrl-P</a></li>
+<li><a href="https://github.com/tpope/vim-fugitive">Fugitive</a></li>
+<li>
+<a href="https://github.com/tpope/vim-git">Git</a> <em>updated runtime for Fugitive</em>
+</li>
+<li><a href="https://github.com/nathanaelkane/vim-indent-guides">Indent Guides</a></li>
+<li><a href="https://github.com/csexton/jekyll.vim">Jekyll</a></li>
+<li><a href="https://github.com/tpope/vim-markdown.git">Markdown</a></li>
+<li>
+<a href="https://github.com/altercation/vim-colors-solarized">Solarized</a> </li>
+<li><a href="https://github.com/ervandew/supertab">Supertab</a></li>
+<li><a href="https://github.com/tpope/vim-surround">Surround</a></li>
+<li><a href="https://github.com/kien/tabman.vim">TabMan</a></li>
+<li><a href="https://github.com/mattn/zencoding-vim">ZenCoding</a></li>
+</ul><h2>contribute pull requests</h2>
+
+<p>Pull Requests will only be merged if they are based off the tip of the
+<a href="/sirlancelot/vim/tree/develop">develop</a> branch. Please rebase (don't merge!) your changes if you are behind.
+To learn about why rebase is better than merge, check out <a href="http://darwinweb.net/articles/the-case-for-git-rebase">The Case for Git
+Rebase</a>.</p>
+
+<p>In short, to bring your Working Copy up to the tip of <a href="/sirlancelot/vim/tree/develop">develop</a>, you can use the
+rebase feature: <code>git pull --rebase</code>. See <a href="http://gitready.com/advanced/2009/02/11/pull-with-rebase.html">Pull with Rebase</a> for details.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
