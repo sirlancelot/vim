@@ -10,21 +10,17 @@ can even [contribute](#contribute-pull-requests).
 
 Install on Unix-based machines:
 
-    git clone https://github.com/sirlancelot/vim.git ~/.vim
-    ./extra/install.sh
+    $ git clone --recursive https://github.com/sirlancelot/vim ~/.vim
+    $ ./extra/install.sh
 
 You do not need to link `gvimrc.vim` as it is loaded at the bottom of `vimrc.vim`
 
 Install on other platforms: just copy or link `vimrc.vim` to your
-home directory and call it `.vimrc`
-
-If you want tags of just my settings (no plugins):
-
-    ctags -R personal/ *.vim
+home directory and call it `.vimrc` or `_vimrc` on Windows.
 
 ## key mappings
 
-Leader Key: , *(comma)*
+Leader Key: `,` *(comma)*
 
   - Use `<leader>ev` and `<leader>eg` to edit vimrc and gvimrc respectively.
     They will be automatically reloaded when you save.
@@ -33,7 +29,7 @@ Leader Key: , *(comma)*
     whitespace.
   - `<tab>` and `<s-tab>` with a selection will indent and unindent,
     respectively.
-  - shift+`T` in normal mode will strip all trailing whitespace.
+  - `<s-T>` in normal mode will strip all trailing whitespace.
 
 ## mac terminal settings
 
