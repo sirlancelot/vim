@@ -5,7 +5,7 @@
 "  /___/
 "
 " Maintainer: Matthew Pietz
-" Version: v9
+" Version: v10
 "
 " ===============================================
 " Configuration for Gui Vim
