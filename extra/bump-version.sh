@@ -14,7 +14,11 @@ if [ -z $Version ]; then
 fi
 
 cd "$GITROOT"
-for File in *vimrc.vim; do
+git ls-files "*.vim" | while read File; do
+	if ! grep -Eq "^\" Version: v.+$" "$File"; then
+		continue
+	fi
+
 	echo "Bumping version number in $File..."
 	if ! sed "s/^\(\" Version: \)v.*$/\1v$Version/" "$File" > "$File~"; then
 		echo "Could not replace Version in $File." >&2
@@ -24,4 +28,4 @@ for File in *vimrc.vim; do
 	git add "$File"
 done
 
-git commit -m "Bumped version to v$Version"
+echo "Now run: git commit -m \"Bumped version to v$Version\""

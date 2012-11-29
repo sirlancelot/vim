@@ -14,7 +14,7 @@ ln -sf .vim/vimrc.vim .vimrc
 
 cd "$RCDIR"
 
-echo "Initializing submodules..."
+echo "(Re)Initializing submodules..."
 git submodule update --init
 
 if [ ! -f vimrc.local.vim ]; then
