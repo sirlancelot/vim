@@ -8,28 +8,37 @@
 "
 " ===============================================
 set nocompatible encoding=utf8
+
 " Initialize Path and Plugins {{{1
+" Cross-platform runtime paths
+set runtimepath=~/.vim/personal,~/.vim,~/.vim/bundle/vundle,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
+" source local, machine-specific settings
+runtime! vimrc.local.vim
+
 let mapleader = ","
 let s:GUIRunning = has('gui_running')
-let g:pathogen_disabled = []
-filetype off                               " load these after pathogen
-if !exists('g:loaded_pathogen') " {{{2
-	" Cross-platform runtime paths
-	set runtimepath=$HOME/.vim/personal,$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-	" source local, machine-specific settings
-	runtime! vimrc.local.vim
-	runtime pathogen.vim
 
-	" Disable some plugins for console vim
-	if !s:GUIRunning
-		call extend(g:pathogen_disabled, ['supertab','indent-guides','solarized'])
-	endif
-	if v:version < 700
-		call extend(g:pathogen_disabled, ['tabman','ctrlp'])
-	endif
-
-	call pathogen#runtime_append_all_bundles()
-endif " }}}
+filetype off                               " Load filetypes after vundle
+" Load Vundles {{{2
+Bundle 'csexton/jekyll.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'mattn/zencoding-vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-surround'
+if s:GUIRunning
+	Bundle 'altercation/vim-colors-solarized'
+	Bundle 'ervandew/supertab'
+endif
+if v:version >= 700
+	Bundle 'kien/ctrlp.vim'
+	Bundle 'kien/tabman.vim'
+endif
+" }}}
 filetype plugin indent on                  " ... here
 
 function! SetIfDefault(Option, New) " {{{2
