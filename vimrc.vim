@@ -1,3 +1,4 @@
+set nocompatible encoding=utf8
 " ===============================================
 "    _  __(_)__ _  ________
 "  _| |/ / //  ' \/ __/ __/
@@ -7,30 +8,41 @@
 " Version: v10
 "
 " ===============================================
-set nocompatible encoding=utf8
-" Initialize Path and Plugins {{{1
-let mapleader = ","
+" Initialization {{{1
 let s:GUIRunning = has('gui_running')
-let g:pathogen_disabled = []
-filetype off                               " load these after pathogen
-if !exists('g:loaded_pathogen') " {{{2
-	" Cross-platform runtime paths
-	set runtimepath=$HOME/.vim/personal,$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-	" source local, machine-specific settings
-	runtime! vimrc.local.vim
-	runtime pathogen.vim
+let mapleader = ","
 
-	" Disable some plugins for console vim
-	if !s:GUIRunning
-		call extend(g:pathogen_disabled, ['supertab','indent-guides','solarized'])
-	endif
-	if v:version < 700
-		call extend(g:pathogen_disabled, ['tabman','ctrlp'])
-	endif
+" Cross-platform with a personal touch
+set runtimepath=~/.vim/personal,~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 
-	call pathogen#runtime_append_all_bundles()
-endif " }}}
-filetype plugin indent on                  " ... here
+" Vundle Essential {{{2
+set runtimepath+=~/.vim/bundle/vundle
+call vundle#rc()
+set runtimepath-=~/.vim/bundle/vundle
+Bundle 'gmarik/vundle'
+" }}}
+
+" source local, machine-specific settings
+runtime! vimrc.local.vim
+
+filetype off                       " Load filetypes after vundle
+" Load Standard Vundles {{{2
+Bundle 'csexton/jekyll.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'mattn/zencoding-vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-surround'
+if s:GUIRunning
+	Bundle 'altercation/vim-colors-solarized'
+	Bundle 'Shougo/neocomplcache'
+endif
+if v:version >= 700
+	Bundle 'kien/ctrlp.vim'
+endif
+" }}}
+filetype plugin indent on          " ... here
 
 function! SetIfDefault(Option, New) " {{{2
 	let l:Current = eval('&'.a:Option)
@@ -54,8 +66,7 @@ endif
 " }}} ===========================================
 " Look & feel {{{1
 syntax on
-if !s:GUIRunning | colorscheme desert | endif
-set background=dark
+if (&t_Co > 16 || s:GUIRunning) | colorscheme mustang | endif
 set cmdheight=2
 set noequalalways
 set nowrap
@@ -72,6 +83,7 @@ let &listchars="tab:".nr2char(9656).nr2char(183).",trail:".nr2char(8212)
 nmap <space> za
 nmap <s-space> zA
 
+" Show fold Percentage along with # of lines
 set foldtext=VimrcFoldText()
 function! VimrcFoldText() " {{{2
 	let line = foldtext()
@@ -80,13 +92,13 @@ function! VimrcFoldText() " {{{2
 	let lineCount = line("$")
 	let foldPercentage = printf("%4.1f", (foldSize*1.0)/lineCount*100)
 
-	" Show fold Percentage along with # of lines
 	return substitute(line, '^\([-+]\+\)\(\s\+\)\(\d\+\) lines:', '\1 '.foldPercentage.'%\2(\3 lines)', 'g')
 endfunction " }}}
 
 " }}} ===========================================
 " Editing behavior {{{1
 set backspace=indent,eol,start
+set mousemodel=popup_setpos
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
@@ -106,6 +118,13 @@ vnoremap <s-tab> <gv
 " Shift+T Clears all trailing whitespace from the file
 nnoremap <silent> <S-T> :call sorc#Preserve('%s/\s\+$//e')<CR>
 
+" Edit in Window, Edit in Split, Edit in Vertical split, Edit in Tab
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>eu :vsp %%
+map <leader>et :tabe %%
+
 " }}} ===========================================
 " Searching {{{1
 set ignorecase
@@ -114,8 +133,8 @@ set hlsearch
 set incsearch
 
 " Turn off search highlighting
-nnoremap <C-L> :nohl<CR><C-L>
-inoremap <C-L> <C-O>:nohl<CR>
+nnoremap <C-L> :nohlsearch<CR>
+inoremap <C-L> <C-O>:nohlsearch<CR>
 
 " Show help window vertically
 cabbrev <expr> h getcmdline()=~'^h' ? 'vert h' : 'h'
@@ -126,7 +145,7 @@ set hidden       " switch between buffers without requiring save
 set autoread     " load a file that was changed outside of vim
 
 if has('persistent_undo')
-	" Set this to your Dropbox folder in `vimrc.local.cim`
+	" Set this to your Dropbox folder in `vimrc.local.vim`
 	call SetIfDefault('undodir', '$HOME/.vimundo//')
 	if !isdirectory(&undodir) | call mkdir(&undodir, "p") | endif
 	set undofile
@@ -163,8 +182,19 @@ function! s:ChangeWorkingDirectory() " {{{2
 endfunction " }}}
 
 " }}} ===========================================
-" TabMan Plugin Settings {{{1
-let g:tabman_number = 0
+" NeoComplCache Plugin Settings {{{1
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_enable_auto_delimiter = 1
+let g:neocomplcache_max_list = 15
+let g:neocomplcache_force_overwrite_completefunc = 1
+
+" SuperTab like snippets behavior.
+inoremap <expr><TAB>   (pumvisible() ? "\<C-n>" : "\<TAB>")
+inoremap <expr><S-TAB> (pumvisible() ? "\<C-p>" : "\<C-h>")
 
 " }}} ===========================================
 " Check for GUI {{{1
