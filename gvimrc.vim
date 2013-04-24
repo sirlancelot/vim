@@ -15,15 +15,9 @@ set guitablabel=%t      " Show just the filename in the tab
 set guitabtooltip=%F    " Show the full path on rollover
 set switchbuf=usetab
 
-" }}} ===========================================
-" Increase visuals {{{1
 set number
 set laststatus=2
 set statusline=%<%f\ %h%m%r%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-
-let g:solarized_underline = 0      " don't underline folds (default: 1)
-let g:solarized_contrast = "high"  " make text easier to read (default: normal)
-colorscheme solarized
 
 " }}} ===========================================
 " Platform specific stuff {{{1

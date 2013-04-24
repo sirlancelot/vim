@@ -66,8 +66,7 @@ endif
 " }}} ===========================================
 " Look & feel {{{1
 syntax on
-if !s:GUIRunning | colorscheme desert | endif
-set background=dark
+if (&t_Co > 16 || s:GUIRunning) | colorscheme mustang | endif
 set cmdheight=2
 set noequalalways
 set nowrap
