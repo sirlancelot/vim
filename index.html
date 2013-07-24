@@ -1,34 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <title>Vim by sirlancelot</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/sirlancelot/vim">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/sirlancelot/vim/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/sirlancelot/vim/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <header>
-      <div class="container">
-        <h1>Vim</h1>
-        <h2>A &quot;sensible defaults&quot; configuration for Vim. I'm primarily a PHP developer but these settings assume nothing. Instead, I tried to make a boilerplate setup that works for almost any environment.</h2>
+    <div class="wrapper">
 
-        <section id="downloads">
-          <a href="https://github.com/sirlancelot/vim/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/sirlancelot/vim/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/sirlancelot/vim" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+      <section>
+        <div id="title">
+          <h1>Vim</h1>
+          <p>A &quot;sensible defaults&quot; configuration for Vim. I'm primarily a PHP developer but these settings assume nothing. Instead, I tried to make a boilerplate setup that works for almost any environment.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/sirlancelot">sirlancelot</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-    <div class="container">
-      <section id="main_content">
-        <h1>sirlancelot's dot vimrc</h1>
+        <h1>
+<a name="sirlancelots-dot-vimrc" class="anchor" href="#sirlancelots-dot-vimrc"><span class="octicon octicon-link"></span></a>sirlancelot's dot vimrc</h1>
 
 <p>Keeping things minimal yet convenient. Find out how to
 <a href="#installation">install it</a>, then learn the <a href="#key-mappings">key mappings</a>. If
@@ -36,27 +47,24 @@ you're on a Mac, get your <a href="#mac-terminal-settings">terminal settings rig
 Find out what <a href="#plugins-used">plugins</a> I used. If you're feeling generous, you
 can even <a href="#contribute-pull-requests">contribute</a>.</p>
 
-<h2>installation</h2>
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>installation</h2>
 
 <p>Install on Unix-based machines:</p>
 
-<pre><code>git clone https://github.com/sirlancelot/vim ~/.vim
-./extra/install.sh
+<pre><code>$ git clone --recursive https://github.com/sirlancelot/vim ~/.vim
+$ ./extra/install.sh
 </code></pre>
 
 <p>You do not need to link <code>gvimrc.vim</code> as it is loaded at the bottom of <code>vimrc.vim</code></p>
 
 <p>Install on other platforms: just copy or link <code>vimrc.vim</code> to your
-home directory and call it <code>.vimrc</code></p>
+home directory and call it <code>.vimrc</code> or <code>_vimrc</code> on Windows.</p>
 
-<p>If you want tags of just my settings (no plugins):</p>
+<h2>
+<a name="key-mappings" class="anchor" href="#key-mappings"><span class="octicon octicon-link"></span></a>key mappings</h2>
 
-<pre><code>ctags -R personal/ *.vim
-</code></pre>
-
-<h2>key mappings</h2>
-
-<p>Leader Key: , <em>(comma)</em></p>
+<p>Leader Key: <code>,</code> <em>(comma)</em></p>
 
 <ul>
 <li>Use <code>&lt;leader&gt;ev</code> and <code>&lt;leader&gt;eg</code> to edit vimrc and gvimrc respectively.
@@ -68,8 +76,10 @@ whitespace.</li>
 <li>
 <code>&lt;tab&gt;</code> and <code>&lt;s-tab&gt;</code> with a selection will indent and unindent,
 respectively.</li>
-<li>shift+<code>T</code> in normal mode will strip all trailing whitespace.</li>
-</ul><h2>mac terminal settings</h2>
+<li>
+<code>&lt;s-T&gt;</code> in normal mode will strip all trailing whitespace.</li>
+</ul><h2>
+<a name="mac-terminal-settings" class="anchor" href="#mac-terminal-settings"><span class="octicon octicon-link"></span></a>mac terminal settings</h2>
 
 <p>If the <code>&lt;Home&gt;</code> and <code>&lt;End&gt;</code> keys aren't working for you in Console Vim, you need to
 add the following changes to your Terminal Preferences Keyboard Settings:</p>
@@ -81,7 +91,8 @@ add the following changes to your Terminal Preferences Keyboard Settings:</p>
 </li>
 </ul><p>Note: <code>\033</code> is typed by pressing <code>&lt;Escape&gt;</code> when the cursor is in the text box.</p>
 
-<h2>plugins used</h2>
+<h2>
+<a name="plugins-used" class="anchor" href="#plugins-used"><span class="octicon octicon-link"></span></a>plugins used</h2>
 
 <p>All plugins are placed in the <code>bundle/</code> subfolder and are git submodules. Each
 bundle is loaded using <a href="https://github.com/tpope/vim-pathogen">Pathogen</a>. Rather than clutter up the <code>.vim</code> root
@@ -104,7 +115,8 @@ folder, my personal additions have been placed either in the <code>*vimrc.vim</c
 <li><a href="https://github.com/tpope/vim-surround">Surround</a></li>
 <li><a href="https://github.com/kien/tabman.vim">TabMan</a></li>
 <li><a href="https://github.com/mattn/zencoding-vim">ZenCoding</a></li>
-</ul><h2>contribute pull requests</h2>
+</ul><h2>
+<a name="contribute-pull-requests" class="anchor" href="#contribute-pull-requests"><span class="octicon octicon-link"></span></a>contribute pull requests</h2>
 
 <p>Pull Requests will only be merged if they are based off the tip of the
 <a href="/sirlancelot/vim/tree/develop">develop</a> branch. Please rebase (don't merge!) your changes if you are behind.
@@ -114,8 +126,9 @@ Rebase</a>.</p>
 <p>In short, to bring your Working Copy up to the tip of <a href="/sirlancelot/vim/tree/develop">develop</a>, you can use the
 rebase feature: <code>git pull --rebase</code>. See <a href="http://gitready.com/advanced/2009/02/11/pull-with-rebase.html">Pull with Rebase</a> for details.</p>
       </section>
-    </div>
 
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
 </html>
