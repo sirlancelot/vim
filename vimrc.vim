@@ -29,7 +29,7 @@ filetype off                       " Load filetypes after vundle
 " Load Standard Vundles {{{2
 Bundle 'csexton/jekyll.vim'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
